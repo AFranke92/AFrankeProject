@@ -11,7 +11,8 @@
         android:layout_height="300dp"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
-        <LinearLayout
+
+<!--        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -28,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:text="Hi!"/>
 
-        </LinearLayout>
+        </LinearLayout>-->
 
     </ScrollView>
 
