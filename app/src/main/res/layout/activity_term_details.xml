@@ -7,29 +7,97 @@
     tools:context=".UI.TermDetails">
     
     <ScrollView
+
+        android:id="@+id/termScrollView"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
 
-<!--        <LinearLayout
+        <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hi!"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hi!"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hi!"/>
 
-        </LinearLayout>-->
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Term Name:"/>
+
+            <EditText
+
+                android:id="@+id/termName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Spring Term 20XX"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Term Start:"/>
+
+            <EditText
+
+                android:id="@+id/termStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="01/01/20XX"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Term End:"/>
+
+            <EditText
+
+                android:id="@+id/termEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="06/30/20XX"/>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/saveTerm"
+                android:text="Save"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </LinearLayout>
+
 
     </ScrollView>
 
@@ -44,4 +112,13 @@
         app:layout_constraintHorizontal_bias="0.954"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/baseline_add_24" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        app:layout_constraintTop_toBottomOf="@id/termScrollView"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/courseRecyclerView"
+        android:layout_width="409dp"
+        android:layout_height="357dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="301dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
