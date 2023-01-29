@@ -10,6 +10,8 @@ import android.c196.afrankeproject.entities.Course;
 import android.c196.afrankeproject.entities.Term;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +24,7 @@ import java.util.List;
 
 public class TermDetails extends AppCompatActivity {
 
+    Term currentTerm;
     EditText editName;
     EditText editStart;
     EditText editEnd;
@@ -30,6 +33,7 @@ public class TermDetails extends AppCompatActivity {
     String start;
     String end;
     int id;
+    int numCourses;
 
     Term term;
     Repository repository;
@@ -39,7 +43,6 @@ public class TermDetails extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_details);
-        FloatingActionButton fab = findViewById(R.id.floatingActionButton2);
 
         editName = findViewById(R.id.termName);
         editStart = findViewById(R.id.termStart);
@@ -54,10 +57,9 @@ public class TermDetails extends AppCompatActivity {
         editStart.setText(start);
         editEnd.setText(end);
 
-        repository = new Repository(getApplication());
-
         RecyclerView recyclerView = findViewById(R.id.courseRecyclerView);
         repository = new Repository(getApplication());
+
         final CourseAdapter courseAdapter = new CourseAdapter(this);
         recyclerView.setAdapter(courseAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -81,28 +83,87 @@ public class TermDetails extends AppCompatActivity {
 
                     term = new Term(0, editName.getText().toString(), editStart.getText().toString(), editEnd.getText().toString());
                     repository.insert(term);
-                    //Toast.makeText(this, "Term is saved", Toast.LENGTH_LONG).show());
+                    Toast.makeText(TermDetails.this, "New term successfully added", Toast.LENGTH_LONG).show();
 
                 }
                 else {
 
                     term = new Term(id, editName.getText().toString(), editStart.getText().toString(), editEnd.getText().toString());
                     repository.update(term);
-
+                    Toast.makeText(TermDetails.this, "Term successfully updated", Toast.LENGTH_LONG).show();
 
                 }
             }
         });
 
+        FloatingActionButton fab = findViewById(R.id.floatingActionButton2);
         fab.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
 
                 Intent intent = new Intent(TermDetails.this, CourseDetails.class);
+                intent.putExtra("termID", id);
                 startActivity(intent);
 
             }
         });
     }
+
+    @Override
+    protected void onResume() {
+
+        super.onResume();
+        RecyclerView recyclerView = findViewById(R.id.courseRecyclerView);
+        final CourseAdapter courseAdapter = new CourseAdapter(this);
+        recyclerView.setAdapter(courseAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        List<Course> filteredCourses = new ArrayList<>();
+
+        for (Course c : repository.getAllCourses()) {
+
+            if (c.getTermID() == id) {
+
+                filteredCourses.add(c);
+            }
+        }
+        courseAdapter.setCourses(filteredCourses);
+    }
+
+    public boolean onCreateOptionsMenu (Menu menu) {
+
+        getMenuInflater().inflate(R.menu.deleteterm, menu);
+        return true;
+
+    }
+
+    public boolean onOptionsItemSelected (MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.deleteTerm:
+                for (Term t : repository.getAllTerms()) {
+                    if (t.getTermID() == id) {
+                        currentTerm = t;
+                    }
+                }
+                numCourses = 0;
+                for (Course c : repository.getAllCourses()) {
+                    if (c.getTermID() == id) {
+                        ++numCourses;
+                    }
+                }
+                if (numCourses == 0) {
+                    repository.delete(currentTerm);
+                    Toast.makeText(TermDetails.this, currentTerm.getTermName() + " was deleted", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Toast.makeText(TermDetails.this, "Can not delete a term with courses", Toast.LENGTH_LONG).show();
+                }
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
 }

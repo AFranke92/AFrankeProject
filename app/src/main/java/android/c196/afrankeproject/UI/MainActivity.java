@@ -17,15 +17,14 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static int numAlert;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button button = findViewById(R.id.button);
-
-//          Term term = new Term(0, "Term 1", "01/01/2023", "06/30/2023");
-//          Repository repository = new Repository(getApplication());
-//          repository.insert(term);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,22 +36,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
+
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
+
         switch(item.getItemId()) {
+
             case R.id.addSampleData:
-                Term term = new Term(0, "Term 1", "01/01/2023", "06/30/2023");
+                Term term = new Term(1, "Term 1", "01/01/2023", "06/30/2023");
                 Repository repository = new Repository(getApplication());
                 repository.insert(term);
-                Course course = new Course(0, "Algebra", "01/10/2023", "02/01/2023", "In Progress", "Abigail Franke", "6146200230", "afra480@wgu.edu", "", 1);
+                Course course = new Course(1, "Algebra", "01/10/2023", "02/01/2023", "In Progress", "Abigail Franke", "6146200230", "afra480@wgu.edu", "", 1);
                 repository.insert(course);
-                Assessment assessment = new Assessment(0, "Performance", "01/15/2023", "01/15/2023", 1);
+                Assessment assessment = new Assessment(1, "Performance", "Task 1", "01/15/2023", "01/15/2023", 1);
                 repository.insert(assessment);
                 return true;
+
         }
+
         return super.onOptionsItemSelected(item);
     }
 

@@ -26,7 +26,6 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
             termItemView = itemView.findViewById(R.id.textView);
 
             itemView.setOnClickListener(new View.OnClickListener() {
-
                 @Override
                 public void onClick(View view) {
 
@@ -70,11 +69,14 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
     public void onBindViewHolder(@NonNull TermAdapter.TermViewHolder holder, int position) {
 
         if (mTerms != null) {
+
             Term current = mTerms.get(position);
             String name = current.getTermName();
             holder.termItemView.setText(name);
+
         }
         else {
+
             holder.termItemView.setText("No Term Name");
         }
 

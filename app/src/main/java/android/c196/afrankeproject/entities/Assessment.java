@@ -8,13 +8,15 @@ public class Assessment {
 
     @PrimaryKey(autoGenerate = true)
     private int assessmentID;
+    private String assessmentType;
     private String assessmentName;
     private String assessmentStart;
     private String assessmentEnd;
     private int courseID;
 
-    public Assessment(int assessmentID, String assessmentName, String assessmentStart, String assessmentEnd, int courseID) {
+    public Assessment(int assessmentID, String assessmentType, String assessmentName, String assessmentStart, String assessmentEnd, int courseID) {
         this.assessmentID = assessmentID;
+        this.assessmentType = assessmentType;
         this.assessmentName = assessmentName;
         this.assessmentStart = assessmentStart;
         this.assessmentEnd = assessmentEnd;
@@ -31,6 +33,14 @@ public class Assessment {
 
     public void setAssessmentID(int assessmentID) {
         this.assessmentID = assessmentID;
+    }
+
+    public String getAssessmentType() {
+        return assessmentType;
+    }
+
+    public void setAssessmentType(String assessmentType) {
+        this.assessmentType = assessmentType;
     }
 
     public String getAssessmentName() {
@@ -64,4 +74,5 @@ public class Assessment {
     public void setCourseID(int courseID) {
         this.courseID = courseID;
     }
+
 }

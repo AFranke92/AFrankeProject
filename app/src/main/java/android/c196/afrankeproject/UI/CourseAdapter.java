@@ -21,11 +21,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         private final TextView courseName;
         private final TextView courseStart;
         private final TextView courseEnd;
-        private final TextView courseStatus;
-        private final TextView courseInstName;
-        private final TextView courseInstPhone;
-        private final TextView courseInstEmail;
-        private final TextView courseNote;
+
 
         private CourseViewHolder(View itemView) {
 
@@ -33,11 +29,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
             courseName = itemView.findViewById(R.id.textViewCourseName);
             courseStart = itemView.findViewById(R.id.textViewCourseStart);
             courseEnd = itemView.findViewById(R.id.textViewCourseEnd);
-            courseStatus = itemView.findViewById(R.id.textViewCourseStatus);
-            courseInstName = itemView.findViewById(R.id.textViewCourseInstName);
-            courseInstPhone = itemView.findViewById(R.id.textViewCourseInstPhone);
-            courseInstEmail = itemView.findViewById(R.id.textViewCourseInstEmail);
-            courseNote = itemView.findViewById(R.id.textViewCourseNote);
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
 
@@ -47,7 +39,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                     int position = getAdapterPosition();
                     final Course current = mCourses.get(position);
                     Intent intent = new Intent(context, CourseDetails.class);
-                    intent.putExtra("id", current.getCourseID());
+                    intent.putExtra("courseID", current.getCourseID());
                     intent.putExtra("name", current.getCourseName());
                     intent.putExtra("start", current.getCourseStart());
                     intent.putExtra("end", current.getCourseEnd());
@@ -56,7 +48,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                     intent.putExtra("instPhone", current.getCourseIntPhone());
                     intent.putExtra("instEmail", current.getCourseIntEmail());
                     intent.putExtra("note", current.getCourseNote());
-                    //intent.putExtra("termId", current.getTermID());
+                    intent.putExtra("termID", current.getTermID());
                     context.startActivity(intent);
 
                 }
@@ -92,22 +84,14 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         if (mCourses != null) {
 
             Course current = mCourses.get(position);
+
             String name = current.getCourseName();
             String start = current.getCourseStart();
             String end = current.getCourseEnd();
-            String status = current.getCourseStatus();
-            String instName = current.getCourseIntName();
-            String instPhone = current.getCourseIntPhone();
-            String instEmail = current.getCourseIntEmail();
-            String note = current.getCourseNote();
+
             holder.courseName.setText(name);
             holder.courseStart.setText(start);
             holder.courseEnd.setText(end);
-            holder.courseStatus.setText(status);
-            holder.courseInstName.setText(instName);
-            holder.courseInstPhone.setText(instPhone);
-            holder.courseInstEmail.setText(instEmail);
-            holder.courseNote.setText(note);
 
         }
         else {
@@ -115,11 +99,6 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
             holder.courseName.setText("No course name");
             holder.courseStart.setText("No course start");
             holder.courseEnd.setText("No course end");
-            holder.courseStatus.setText("No course status");
-            holder.courseInstName.setText("No course instructor name");
-            holder.courseInstPhone.setText("No course instructor phone");
-            holder.courseInstEmail.setText("No course instructor email");
-            holder.courseNote.setText("No course note");
 
         }
 
